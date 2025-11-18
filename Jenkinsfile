@@ -1214,17 +1214,6 @@ View Build: ${env.BUILD_URL}console
             steps {
                 echo 'Deploying to Vercel (serverless)...'
                 script {
-                    // Check if Vercel CLI is available
-                    def vercelAvailable = sh(
-                        script: 'command -v vercel &> /dev/null && echo "yes" || echo "no"',
-                        returnStdout: true
-                    ).trim() == 'yes'
-                    
-                    if (!vercelAvailable) {
-                        echo 'Vercel CLI not found. Installing globally...'
-                        sh 'npm install -g vercel@latest'
-                    }
-                    
                     // Check for Vercel token credential
                     def hasVercelToken = false
                     try {
@@ -1254,12 +1243,12 @@ View Build: ${env.BUILD_URL}console
                             sh '''
                                 export VERCEL_TOKEN="${VERCEL_TOKEN}"
                                 
-                                # Verify Vercel CLI is working
-                                vercel --version
+                                # Verify Vercel CLI is working (using npx to avoid PATH issues)
+                                npx --yes vercel --version
                                 
                                 # Deploy to preview (non-production)
                                 # This creates a preview deployment for the branch
-                                vercel --yes --token="${VERCEL_TOKEN}" || {
+                                npx --yes vercel --yes --token="${VERCEL_TOKEN}" || {
                                     echo "Preview deployment failed, but continuing..."
                                     exit 0
                                 }
@@ -1271,8 +1260,8 @@ View Build: ${env.BUILD_URL}console
                                 sh '''
                                     export VERCEL_TOKEN="${VERCEL_TOKEN}"
                                     
-                                    # Deploy to production
-                                    vercel --prod --yes --token="${VERCEL_TOKEN}"
+                                    # Deploy to production (using npx to avoid PATH issues)
+                                    npx --yes vercel --prod --yes --token="${VERCEL_TOKEN}"
                                 '''
                                 
                                 echo '✓ Successfully deployed to Vercel production'
