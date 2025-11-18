@@ -1,0 +1,77 @@
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Testing
+coverage/
+.nyc_output
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Next.js
+/.next/
+/out/
+next-env.d.ts
+
+# Production
+/build
+/dist
+
+# Misc
+.DS_Store
+*.pem
+*.log
+*.tsbuildinfo
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local env files
+.env
+.env*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Database files (SQLite - if any)
+*.db
+*.db-shm
+*.db-wal
+data/
+
+# Temporary files
+*.tmp
+*.temp
+/tmp
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Jenkins
+.jenkins/
+
+# SonarQube
+.scannerwork/
+
+# Build artifacts
+*.tgz
+*.tar.gz
+

@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: softdev-solutions-website
+    env: node
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: 20
+      - key: CI
+        value: false
+      # SQLite database path - stored in persistent disk
+      - key: DATABASE_PATH
+        value: /opt/render/project/src/data/users.db
+    healthCheckPath: /
+    autoDeploy: true
+    branch: main
+    region: singapore
+    # SQLite database will be automatically initialized on first API call
+    # Database file is stored in the data/ directory
+
+
